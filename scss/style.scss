@@ -1,9 +1,13 @@
 *{
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 a{
     text-decoration: none;
+}
+.uppercase{
+    text-transform: uppercase;
 }
 
 @mixin size ($width,$height){
@@ -22,6 +26,11 @@ a{
     font-size: $size;
     color: $color;
 }
+@mixin Img ($img){
+    background-image: url($img);
+    background-repeat: no-repeat;
+    background-position: center;  
+}
 @mixin time {
     @include flex(row);
     @include font(14px, #131313);
@@ -31,22 +40,21 @@ a{
     text-align: start;
     width: 10px;
 }
-@mixin status($color, $width) {
+@mixin status($color, $width, $svg) {
     @include flex(row);
     @include font(16px, #131313);
-    #status{
+    &::before{
+        content: "";
         @include size(40px, 40px);
-        @include font(13px, #eeecec);
-        position: relative;
         background-color: $color;
         border-radius: 50%;
+        @include Img($svg);   
     }
     p{
         width: $width;
         margin-left: 2.5%;
     }
-
-#time{
+    #time{
         @include time;
         width: 16%;
     }
@@ -54,7 +62,7 @@ a{
 
 body{
     background-color: #F7F6F3;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans',  Helvetica, sans-serif;
     @include flex(row);
 }
 #base{
@@ -72,26 +80,37 @@ body{
 
 
 menu{
-    @include size(270px, 1117px);
+    width: 270px;
+    padding-bottom: 100%;
     background-color: #000;
-
-    #Porojectus{
+    .Porojectus{
+        width: 270px;
         @include flex(row);
-            #logo{
+         
+            &::before{
+                content: "";
                 @include position(30.4px, 32.5px);
-            }
+                @include size(21.5px, 18.9px);
+                @include Img("/img/svg/Logo@3x.svg");
+            } 
             span{
                 @include position(13px, 30px);
-                color: white;
-                width: 230px;
+                @include size(87px, 24px);
+                @include font(17px, #fff);
             }
-            #search{
-                @include size(16px, 16px);
-                @include position(234px, 33px);
-                position: absolute;
-            }
+        .search{
+            content: "";
+            @include position(82px, 33px);
+            @include size(16px, 16px);
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            @include Img("/img/svg/Search@3x.svg");
+        }
     }
-    #User{
+
+    .User{
         @include size(100%, 80px);
         @include flex(row);
         margin-top: 30px;
@@ -103,25 +122,25 @@ menu{
             border-radius: 50%;
         }
 
-        #userName{
+        .userName{
             @include flex(row);
             margin-top: 20px;
                 div{
                     @include flex(column);
                 }
 
-                #user{
+                .user{
                     @include font (14px, #fff);
                     margin-bottom: 2px;
                     margin-left: 13px;
                     width: 92px;
                 }
-                #statusUser{
+                .statusUser{
                     @include flex(row);
                     @include font (12px, #9b9b9b);
                     margin-left: 13px;
                 }
-                #touch{
+                .touch{
                     @include flex(row);
                     @include font(17px, #9b9b9b);
                     @include position(49px, 8px);
@@ -130,7 +149,7 @@ menu{
     }
 
 
-    #work{
+    .work{
         @include flex(row);
         @include position(30px, 20px);
 
@@ -142,14 +161,21 @@ menu{
             }
             .res{
                 @include flex(column);
+                padding: 10px;
+                margin: -10px;
+                &:hover{
+                    background-color: #2e2e2e;
+                    border-radius: 2.5px;
+                    cursor: pointer
+                }
 
             }
             .two{
-                padding-left: 20px;
+                margin-left: 20px;
             }
     }
 
-    #menu{
+    .menu{
         @include position(30px, 32px);
         @include flex(column);
             li{
@@ -158,10 +184,10 @@ menu{
             a{
                 @include font(14px, #fff);  
             }   
-            #MENU{
+            .menu{
                 @include font(12px, #878787);
             }
-            #Notifications{
+            .Notifications{
                 @include flex(row);
                     div{
                         @include size(20px, 19px);
@@ -181,90 +207,105 @@ menu{
 nav{
     @include size(100%, 136px);
     background-color: white;
-    #content{
-        @include flex(row);
-    #svg{
-        @include size(40px, 40px);
-        @include position(30px, 39.5px);
-        background-color: #FFC200;
-        border-radius: 10px;
-    }
-    #title{
-        @include flex (row);
-        span{
-                @include font(32px, #131313);
-                @include position(15px, 35px);
-                width: 266px;
-            }
-    }
-    #touch{
-            @include size(25px, 25px);
-            @include position(11px, 45px);
-            @include font(16px, #9b9b9b);
-            padding-top: 4px;
-            padding-left: 5px;
-            background-color: #eaeaea;
-            border-radius: 50%;
-    }
-    #UserShareChat{
-        @include flex(row);
-        margin: 0 0 0 auto;
 
-        #userImg{
-            img{
-                @include size(30px, 30px);
-                @include position(5px, 44px);
-                border-radius: 50%;
-            }
-        }
-        #ShareChat{
-            @include flex(row);
-            #share{
-                @include size(67px, 30px);
-                @include font(14px, #131313);
-                @include position(15px, 45px);
-                @include flex(row);
-                background-color: #eaeaea;
-                border-radius: 15px;
-                span{
-                    padding: 5px 14px 6px 15px;
-                }
-            }
-            #chat{
-                @include size(81px, 30px);
-                @include font(14px, #ffc200);
-                @include position(15px, 45px);
-                @include flex(row);
-                background-color: #fff8dd;
-                border-radius: 15px;
-                span{
-                    padding: 6px 14px 5px 5px;
-                    position: relative;
-                }
-                img{
-                    @include position(15px, 7px);
-                    @include size(16px, 16px);
-                }
-            }
-        }
-        }
     
+    
+    .content{
+            display: flex;
+            flex-wrap: wrap;
+        .svg{
+            @include position(30px, 39.5px);    
+            @include Img("/img/Shapes@2x.png");
+            background-color: #FFC200;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-size: contain;
+        }
+        .title{
+            @include flex (row);
+            .website{
+                    @include font(32px, #131313);
+                    @include position(15px, 35px);
+                }
+        }
+        .touch{
+                @include size(30px, 30px);
+                @include position(11px, 45px);
+                background-color: #eaeaea;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                    span{
+                        @include font(16px, #9b9b9b);
+                    }
+        }
+        .UserShareChat{
+            @include flex(row);
+            margin: 0 0 0 auto;
+
+            .userImg{
+                    @include position(5px, 44px);
+                    img{ 
+                        @include size(30px, 30px);
+                        border-radius: 50%;
+                    }
+            }
+            .ShareChat{
+                @include flex(row);
+                .share{
+                    @include size(67px, 30px);
+                    @include font(14px, #131313);
+                    @include position(15px, 45px);
+                    @include flex(row);
+                    background-color: #eaeaea;
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    border-radius: 15px;
+                        span{
+                            padding: 5px 14px 6px 15px;
+                        }
+                }
+                .chat{
+                    @include size(81px, 30px);
+                    @include font(14px, #ffc200);
+                    @include position(15px, 45px);
+                    @include flex(row);
+                    border: none;
+                    outline: none;
+                    cursor: pointer;
+                    background-color: #fff8dd;
+                    background-image: url("/img/svg/CombinedShape@1x.svg");
+                    background-repeat: no-repeat;
+                    background-position-x: 15px;
+                    background-position-y: 7px;
+                    border-radius: 15px;
+                        span{
+                            padding-left: 36px;
+                        }
+
+                }
+            }
+        }
+        
     }
     
-    #mainMenu{
+    .mainMenu{
         @include flex(row);
         list-style: none;
+        flex-basis: 100%;
 
         @include position(30px, 21px);
         a{
             @include font(16px, #131313);
             opacity: 0.7;
             padding-bottom: 12px;
-        
-        &:hover{
-                opacity: 1;
-                border-bottom: #FFC200 2px solid;
-            }
+            &:hover{
+                    opacity: 1;
+                    border-bottom: #FFC200 2px solid;
+                }
         }
         .Kanban{
             margin-left: 29px;
@@ -284,10 +325,10 @@ nav{
 
 main{
     @include flex(column);
-    @include size(77%, 599px);
+    @include size(68%, 599px);
 
     background-color: #FFF;
-    margin: 30px 0 0 15%;
+    margin: 30px 0 0 20%;
     border-radius: 8px;
 
     #day{
@@ -298,7 +339,7 @@ main{
 
     #postOne{
         @include position(4%, 32px);
-        @include status(#CEF9C6, 68%);
+        @include status(#CEF9C6, 68%, "/img/svg/Icon@3x.svg");
             img{
                 @include size(12px, 9px);
                 margin: 16px 14px 15px 14px;
@@ -306,7 +347,7 @@ main{
     }
     #postTwo{
         @include position(4%, 26px);
-        @include status(#FFF8DD, 68%);
+        @include status(#FFF8DD, 68%, "/img/svg/chat.svg");
             img{
                 @include size(12px, 11.2px);
                 margin: 14px 14px 14.8px 14px;
@@ -314,28 +355,26 @@ main{
     }
     #postThree{
         @include position(4%, 26px);
-        @include status(#E3EFFF, 68%);
+        @include status(#E3EFFF, 68%, "/img/svg/files.svg");
             img{
                 @include size(12px, 13.5px);
                 margin: 13px 14px 13.5px 14px;
             }
     }
+    
         
     #comentary{
-        @include size(70%, 18%);
         @include position(10%, 20px);
-        
-        background-color: #F7F6F3;
-        border-radius: 10px;
             p{
                 @include font(15px, #131313);
-                padding-left: 29px;
-                padding-top: 15px;
-                width: 85%;
+                padding: 20px 30px 20px 29px;
+                background-color: #F7F6F3;
+                border-radius: 10px;
                 text-align: start;
+                width: 73%;
             }
     }
-    #world{
+    .world{
         @include flex(row);
         padding-top: 20px;
         margin: 0 auto;
@@ -349,6 +388,287 @@ main{
 
 }
 
+@media(max-width: 671px){
+    menu{
+        
+        
+    }
+    nav{
+        height: 190px;
+        .content{
+            margin-top: -30px;
+            .UserShareChat{
+                margin: -30px  30px auto;
+                //display: block;
+            }
+        }
+        .mainMenu{
+            margin-top: 20px;
+        }
+        
+    }
+    main{
+        @include size(100%, 100%);
+        margin: 30px 0 0 0;
+        border-radius: 0px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 @media (max-width:1000px) {
     nav{
@@ -617,3 +937,4 @@ main{
             }
         }        
     }
+    */
