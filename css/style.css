@@ -64,7 +64,6 @@ menu {
       font-size: 17px;
       color: #fff; }
     menu .Porojectus .search {
-      content: "";
       margin-left: 82px;
       margin-top: 33px;
       width: 16px;
@@ -139,7 +138,9 @@ menu {
         font-size: 17px;
         color: #9b9b9b;
         margin-left: 49px;
-        margin-top: 8px; }
+        margin-top: 8px;
+        width: 16px;
+        height: 4px; }
   menu .work {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -538,13 +539,28 @@ main {
       border-radius: 8px;
       margin: 5px; }
 
-@media (max-width: 671px) {
+@media (max-width: 971px) {
+  menu {
+    width: 240px; }
+    menu .Porojectus .search {
+      margin-left: 55px; }
+    menu .User .userName .touch {
+      margin-left: 25px;
+      margin-top: 8px; }
   nav {
     height: 190px; }
     nav .content {
       margin-top: -30px; }
+      nav .content .svg {
+        width: 35px;
+        height: 35px; }
       nav .content .UserShareChat {
         margin: -30px  30px auto; }
+      nav .content .title .website {
+        font-size: 28px; }
+      nav .content .touch {
+        width: 25px;
+        height: 25px; }
     nav .mainMenu {
       margin-top: 20px; }
   main {

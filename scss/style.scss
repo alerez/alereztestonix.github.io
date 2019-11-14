@@ -99,7 +99,6 @@ menu{
                 @include font(17px, #fff);
             }
         .search{
-            content: "";
             @include position(82px, 33px);
             @include size(16px, 16px);
             background: none;
@@ -144,6 +143,7 @@ menu{
                     @include flex(row);
                     @include font(17px, #9b9b9b);
                     @include position(49px, 8px);
+                    @include size(16px, 4px);
                 }
         }
     }
@@ -208,8 +208,6 @@ nav{
     @include size(100%, 136px);
     background-color: white;
 
-    
-    
     .content{
             display: flex;
             flex-wrap: wrap;
@@ -388,18 +386,43 @@ main{
 
 }
 
-@media(max-width: 671px){
+@media(max-width: 971px){
     menu{
-        
+        width: 240px;
+        .Porojectus{
+            .search{
+                margin-left: 55px;
+            }
+    }
+    .User{
+        .userName{
+                .touch{
+                    @include position(25px, 8px);
+
+                }
+        }
+    }
         
     }
     nav{
         height: 190px;
         .content{
             margin-top: -30px;
+            .svg{
+                width: 35px;
+                height: 35px;
+            }
             .UserShareChat{
                 margin: -30px  30px auto;
                 //display: block;
+            }
+            .title{
+                .website{
+                        font-size: 28px;
+                    }
+            }
+            .touch{
+                @include size(25px, 25px);
             }
         }
         .mainMenu{
